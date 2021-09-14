@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <script th:src="@{webjars/jquery/1.12.4/jquery.js}" rel="stylesheet"></script>
+    <link th:href="@{webjars/bootstrap/5.1.0/css/bootstrap.min.css}" rel="stylesheet"/>
+    <script th:src="@{webjars/bootstrap/5.1.0/js/bootstrap.min.js}" rel="stylesheet"></script>
+<style>
+    .form-signin-heading{
+        text-align: center;
+    }
+    .form-signin{
+        margin: auto auto;
+        width: 200px;
+    }
+    .btn-primary{
+        width: 100px;
+        line-height: 20px ;
+        padding: 5px;
+        margin: 10px auto;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <form class="form-signin" method="post" action="register">
+        <h3 class="form-signin-heading">用户注册</h3>
+        <label th:text="${msg}" style="color: red"></label><br/>
+        <label for="inputEmail" class="sr-only">账号：</label>
+        <input type="text" id="inputEmail" name="num" class="form-control" placeholder="sdfsdf" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">密码：</label>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+        <a th:href="login">登陆</a>
+
+    </form>
+
+</div>
+
+</body>
+</html>

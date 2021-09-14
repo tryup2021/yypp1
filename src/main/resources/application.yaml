@@ -1,0 +1,66 @@
+spring:
+    datasource:
+#    mysql使用
+#    url: jdbc:mysql://localhost:3306/boot001
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.jdbc.Driver
+#     sqlserver使用
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      url: jdbc:sqlserver://localhost:1433;DatabaseName=boot001
+      username: sa
+      password: 123456
+
+      druid:
+        aop-patterns: com.atguigu.admin.*  #监控SpringBean  监控这个包下的所有组件（bean）
+        filters: stat,wall     # 底层开启功能，stat（sql监控），wall（防火墙）
+        # 还可以添加slf4j，日志记录
+
+        stat-view-servlet:   # 配置监控页功能
+          enabled: true   # 默认是false
+          login-username: admin   #监控页登陆账号
+          login-password: admin   #监控页登陆密码
+          resetEnable: false
+
+        web-stat-filter:  # 监控web
+          enabled: true
+          #监控哪些
+          urlPattern: /*
+          #排除哪些，有设置默认值，就是下面这些，可以不配置
+          exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+
+        # 对上面filters里面的stat和wall的详细配置
+        filter:
+          stat:
+            # 超过1000毫秒的查询都是慢查询
+            slow-sql-millis: 1000
+            # 是否要进入慢查询
+            logSlowSql: true
+            # 这个功能要不要开启
+            enabled: true
+          wall:
+            enabled: true
+            config:
+              # 不允许删表，还有不允许更新
+              drop-table-allow: false
+
+# 配置mybatis规则
+mybatis:
+  #  config-location: classpath:mybatis/mybatis-config.xml
+  # 如果使用spring配置文件去设置，跟全局配置文件是矛盾的，所以二选一
+  mapper-locations: classpath:mapper/*.xml   # 注意 哪个目录下，根目录就是 target
+  configuration:  # 可以指定全局配置中的相关文件
+    map-underscore-to-camel-case: true
+
+# 可以不写全局；配置文件，前提所有全局配置文件的配置都放在configuration配置项中即可
+
+logging:
+ level:
+   com.phome.yypp.dao: trace
+
+#分页插件使用配置，目前未知是否必须
+#pagehelper:
+# helperDialect: mysql
+# reasonable: true
+# supportMethodsArguments: true
+# params: count=countSql
